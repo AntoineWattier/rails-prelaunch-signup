@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def update
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user], :as => :admin)
+    if @user.update(user_params)
       redirect_to users_path, :notice => "User updated."
     else
       redirect_to users_path, :alert => "Unable to update user."
@@ -46,6 +46,12 @@ class UsersController < ApplicationController
       user.send_confirmation_instructions
     end
     redirect_to :back, :only_path => true, :notice => "Sent invitation to #{count} users."
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_me)
   end
 
 end

@@ -14,6 +14,6 @@ MAILCHIMP_LIST_ID: My_List_ID
 ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: changeme
-ROLES: [admin, user]
+ROLES: "[\"admin\", \"user\"]"
 EMAIL_ADDRESS: user@example.com
 DOMAIN: example.com
