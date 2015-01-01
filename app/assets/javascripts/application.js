@@ -37,7 +37,7 @@ $('document').ready(function() {
     return false;
   });
 
-})
+});
 
 // load social sharing scripts if the page includes a Twitter "share" button
 function loadSocial() {

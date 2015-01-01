@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.all
+    @users_invited = User.where.not(confirmation_token: nil)
+    @users_subscribed_today = User.where(confirmation_token: nil).where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def show

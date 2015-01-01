@@ -1,6 +1,15 @@
 <h3>Users</h3>
 <div class="span12">
   <p>
+    Total users : <%= @users.count %>
+  </p>
+  <p>
+    Total users invited : <%= @users_invited.count %>
+  </p>
+  <p>
+    Total users who subscribed today and are not invited : <%= @users_subscribed_today.count %>
+  </p>
+  <p>
     Send Bulk Invitations:
     <%= link_to "10 &#183;".html_safe, bulk_invite_path(:quantity => '10') %>
     <%= link_to "50 &#183;".html_safe, bulk_invite_path(:quantity => '50') %>
