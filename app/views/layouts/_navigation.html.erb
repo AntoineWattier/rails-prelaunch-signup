@@ -6,7 +6,8 @@
     </li>
   <% else %>
     <li>
-    <%= link_to 'Login', new_user_session_path %>
+    <% link_to 'Login', new_user_session_path %>
+    <a data-toggle="modal" href="#login">Login</a>
     </li>
   <% end %>
   <% if user_signed_in? %>

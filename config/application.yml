@@ -19,3 +19,4 @@ EMAIL_ADDRESS: user@example.com
 DOMAIN: example.com
 GMAIL_USERNAME: wattier.antoine@gmail.com
 GMAIL_PASSWORD: zvwttqcxqjbhxqsp
+AUTOINVITE: false

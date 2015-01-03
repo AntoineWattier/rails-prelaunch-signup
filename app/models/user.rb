@@ -63,14 +63,23 @@ class User < ActiveRecord::Base
   def add_user_to_mailchimp
     return if email.include?(ENV['ADMIN_EMAIL'])
     mailchimp = Gibbon::API.new
-    result = mailchimp.lists.subscribe({
-      :id => ENV['MAILCHIMP_LIST_ID'],
-      :email => {:email => self.email},
-      :double_optin => false,
-      :update_existing => true,
-      :send_welcome => true
-      })
-    Rails.logger.info("Subscribed #{self.email} to MailChimp") if result
+    begin
+      result = mailchimp.lists.subscribe({
+        :id => ENV['MAILCHIMP_LIST_ID'],
+        :email => {:email => self.email},
+        :double_optin => false,
+        :update_existing => true,
+        :send_welcome => true
+        })
+      Rails.logger.info("Subscribed #{self.email} to MailChimp") if result
+
+      #Send invite without admin action
+      if ENV["AUTOINVITE"] == "true"
+        self.send_confirmation_instructions
+      end
+    rescue Gibbon::MailChimpError => e
+      Rails.logger.info(e.message)
+    end
   end
 
   def remove_user_from_mailchimp
